@@ -24,10 +24,10 @@ public class KursspringApplicationTests {
 	public void contextLoads() {
 	}
 
-	@Test
-	public void testCastle() {
-		String  except = "Znajduje się tu zamek King's Landing. Zamieszkały przez rycerza Rycerz o imieniu Lancelot ( 29 ). Zadanie: Save princess";
-		assertEquals(except, castle.toString());
-	}
+//	@Test
+//	public void testCastle() {
+//		String  except = "Znajduje się tu zamek King's Landing. Zamieszkały przez rycerza Rycerz o imieniu Lancelot ( 29 ). Zadanie: Save princess";
+//		assertEquals(except, castle.toString());
+//	}
 
 }

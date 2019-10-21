@@ -5,17 +5,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- bean definitions here -->
+    <context:property-placeholder location="classpath:castle.properties"/>
 
-    <context:component-scan base-package="com.myprojects"/>
-
-    <import resource="classpath:config/castle-config.xml"/>
-
-    <bean id="quest" class="com.myprojects.kursspring.domain.Quest"/>
-
-    <bean id="knight" class="com.myprojects.kursspring.domain.Knight">
-        <constructor-arg index="0" value="Lancelot"/>
-        <constructor-arg index="1" value="29"/>
-        <property name="quest" ref="quest"/>
+    <bean id="castle" class="com.myprojects.kursspring.domain.Castle" init-method="build" destroy-method="tearDown">
+        <constructor-arg index="0" ref="knight"/>
+        <property name="name" value="${my.castle.name:East Watch}"/>
     </bean>
 
 </beans>

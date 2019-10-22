@@ -4,7 +4,7 @@ package com.myprojects.kursspring.singleton;
 //Example of Singleton class
 public class PersonUtils {
 
-    PersonUtils instance = null;
+    private static PersonUtils instance = null;
 
     private PersonUtils() {
 

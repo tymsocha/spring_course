@@ -12,7 +12,9 @@
 
     <bean id="quest" class="com.myprojects.kursspring.domain.Quest"/>
 
-    <bean id="knight" class="com.myprojects.kursspring.domain.Knight">
+    <bean id="knight"
+          class="com.myprojects.kursspring.domain.Knight"
+          scope="prototype">
         <constructor-arg index="0" value="Lancelot"/>
         <constructor-arg index="1" value="29"/>
         <property name="quest" ref="quest"/>

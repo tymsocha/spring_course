@@ -1,9 +1,11 @@
 package com.myprojects.kursspring.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class Knight {
     private String name /*= "Lancelot"*/;
 
@@ -30,5 +32,13 @@ public class Knight {
     public void setQuest(Quest quest) {
         System.out.println("Wstawiam zadanie dla rycerza");
         this.quest = quest;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

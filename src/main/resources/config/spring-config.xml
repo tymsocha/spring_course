@@ -10,13 +10,24 @@
 
     <import resource="classpath:config/castle-config.xml"/>
 
-    <bean id="quest" class="com.myprojects.kursspring.domain.Quest"/>
+    <bean id="quest"
+          scope="prototype"
+          class="com.myprojects.kursspring.domain.Quest"/>
 
-    <bean id="knight"
+    <bean id="lancelot"
+          primary="true"
           class="com.myprojects.kursspring.domain.Knight"
           scope="prototype">
         <constructor-arg index="0" value="Lancelot"/>
         <constructor-arg index="1" value="29"/>
+        <property name="quest" ref="quest"/>
+    </bean>
+
+    <bean id="percival"
+          class="com.myprojects.kursspring.domain.Knight"
+          scope="prototype">
+        <constructor-arg index="0" value="Percival"/>
+        <constructor-arg index="1" value="25"/>
         <property name="quest" ref="quest"/>
     </bean>
 

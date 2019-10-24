@@ -1,41 +1,10 @@
 package com.myprojects.kursspring.config;
 
-import com.myprojects.kursspring.domain.Castle;
-import com.myprojects.kursspring.domain.Knight;
-import com.myprojects.kursspring.domain.Quest;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 //@ImportResource("classpath:config/castle-config.xml")
-//@PropertySource("classpath:castle.properties")
+//@PropertySource("classpath:knightRepository.properties")
 public class MainConfig {
 
-    @Bean
-    public Quest createQuest() {
-        return new Quest();
-    }
-
-    @Bean(name = "percival")
-    public Knight percival() {
-        Knight knight = new Knight("Percival", 25);
-        knight.setQuest(createQuest());
-        return knight;
-    }
-
-    @Bean(name = "lancelot")
-    @Primary
-    public Knight createKnight() {
-        Knight knight = new Knight("Lancelot", 29);
-        knight.setQuest(createQuest());
-        return knight;
-    }
-//
-//    @Bean(name = "castle", initMethod = "build", destroyMethod = "tearDown")
-//    @Value("${my.castle.name:East Watch}")
-//    public Castle castle(String name) {
-//        Castle castle = new Castle(knight());
-//        castle.setName(name);
-//        return castle;
-//    }
 }

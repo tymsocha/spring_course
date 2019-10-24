@@ -1,11 +1,5 @@
 package com.myprojects.kursspring.domain;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope("prototype")
 public class Knight {
     private String name /*= "Lancelot"*/;
 
@@ -25,12 +19,11 @@ public class Knight {
 
     @Override
     public String toString() {
-        return "Rycerz o imieniu " + name + " ( " + age + " ). Zadanie: " + quest;
+        return "Knight named " + name + " ( " + age + " ). Quest: " + quest;
     }
 
-    @Autowired
     public void setQuest(Quest quest) {
-        System.out.println("Wstawiam zadanie dla rycerza");
+        System.out.println("Assigning quest to Knight");
         this.quest = quest;
     }
 

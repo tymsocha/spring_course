@@ -5,15 +5,30 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- bean definitions here -->
-    <context:property-placeholder location="classpath:castle.properties"/>
+    <context:property-placeholder location="classpath:knightRepository.properties"/>
 
-    <bean id="castle" class="com.myprojects.kursspring.domain.Castle" init-method="build" destroy-method="tearDown">
+    <bean id="castle" class="com.myprojects.kursspring.repositories.KnightRepository" init-method="build" destroy-method="tearDown">
         <constructor-arg index="0" ref="lancelot"/>
         <property name="name" value="${my.castle.name:East Watch}"/>
     </bean>
 
     <bean id="tournament" class="com.myprojects.kursspring.domain.Tournament">
-        <property name="knight" value="percival"/>
+        <property name="knights">
+            <!--<list>-->
+                <!--<ref bean="percival"/>-->
+                <!--<ref bean="lancelot"/>-->
+            <!--</list>-->
+
+            <!--<set>-->
+            <!--<ref bean="percival"/>-->
+            <!--<ref bean="lancelot"/>-->
+            <!--</set>-->
+
+            <map>
+                <entry key="lancelot" value-ref="lancelot"/>
+                <entry key="percival" value-ref="percival"/>
+            </map>
+        </property>
     </bean>
 
 </beans>

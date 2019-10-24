@@ -1,6 +1,6 @@
 package com.myprojects.kursspring;
 
-import com.myprojects.kursspring.domain.Castle;
+import com.myprojects.kursspring.repositories.KnightRepository;
 import com.myprojects.kursspring.domain.Knight;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ public class KursspringApplicationTests {
 	Knight knight;
 
 	@Autowired
-	Castle castle;
+    KnightRepository knightRepository;
 
 	@Test
 	public void contextLoads() {

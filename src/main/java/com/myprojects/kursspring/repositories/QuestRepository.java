@@ -52,7 +52,6 @@ public class QuestRepository {
         descriptions.add("Find Holy Grail");
 
         String description = descriptions.get(rand.nextInt(descriptions.size()));
-        System.out.println("Quest " + description + " was created");
         createQuest(description);
     }
 }

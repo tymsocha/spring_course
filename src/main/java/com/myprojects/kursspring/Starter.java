@@ -4,6 +4,7 @@ import com.myprojects.kursspring.repositories.KnightRepository;
 import com.myprojects.kursspring.repositories.QuestRepository;
 import com.myprojects.kursspring.services.QuestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -33,4 +34,6 @@ public class Starter implements CommandLineRunner {
         questRepository.createRandomQuest();
         questRepository.createRandomQuest();
     }
+
+
 }

@@ -1,5 +1,10 @@
 package com.myprojects.kursspring.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Knight {
     private String name /*= "Lancelot"*/;
 

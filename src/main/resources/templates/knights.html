@@ -13,12 +13,18 @@
 <div class="container">
         <table class="table">
             <thead>
-            <tr><td>Name of the knight</td><td>Age: </td></tr>
+            <tr>
+                <td>Name of the knight</td>
+                <td>Level: </td>
+                <td></td>
+            </tr>
             </thead>
             <tbody th:each="knight : ${knights}">
                 <tr>
                     <td th:text="${knight.getName()}"></td>
-                    <td th:text="${knight.getAge()}"></td>
+                    <td th:text="${knight.getLevel()}"></td>
+                    <td><a th:href="${'/knight?id='+knight.id}"/>Check out knight</td>
+                    <td><a th:href="${'/knight/delete/'+knight.id}"/>Delete knight</td>
                 </tr>
             </tbody>
         </table>

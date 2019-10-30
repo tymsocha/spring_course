@@ -6,6 +6,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.Collection;
+import java.util.Optional;
 
 public class DBKnightRepository implements KnightRepository {
 
@@ -28,19 +29,31 @@ public class DBKnightRepository implements KnightRepository {
     }
 
     @Override
+    public void createKnight(String name, int age) {
+        System.out.println("Using Database");
+        throw new NotImplementedException();
+    }
+
+    @Override
     public Collection<Knight> getAllKnights() {
         System.out.println("Using Database");
         throw new NotImplementedException();
     }
 
     @Override
-    public Knight getKnight(String name) {
+    public Optional<Knight> getKnight(String name) {
         System.out.println("Using Database");
         throw new NotImplementedException();
     }
 
     @Override
-    public void removeKnight(String name) {
+    public void removeKnight(Integer integer) {
+        System.out.println("Using Database");
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Knight getKnightById(Integer id) {
         System.out.println("Using Database");
         throw new NotImplementedException();
     }

@@ -5,6 +5,7 @@ import com.myprojects.kursspring.domain.Knight;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.Collection;
+import java.util.Optional;
 
 
 public interface KnightRepository {
@@ -14,9 +15,13 @@ public interface KnightRepository {
 
     void createKnight(Knight knight);
 
+    void createKnight(String name, int age);
+
     Collection<Knight> getAllKnights();
 
-    Knight getKnight(String name);
+    Optional<Knight> getKnight(String name);
 
-    void removeKnight(String name);
+    void removeKnight(Integer id);
+
+    Knight getKnightById(Integer id);
 }

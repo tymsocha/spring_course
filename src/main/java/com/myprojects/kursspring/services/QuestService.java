@@ -22,10 +22,9 @@ public class QuestService {
     final static Random rand = new Random();
 
     public void assignRandomQuest(String knightName) {
-        Knight knight = knightRepository.getKnight(knightName);
         List<Quest> allQuests = questRepository.getAll();
         Quest randomQuest = allQuests.get(rand.nextInt(allQuests.size()));
-        knight.setQuest(randomQuest);
+        knightRepository.getKnight(knightName).ifPresent(knight1 -> knight1.setQuest(randomQuest));
         questRepository.removeQuest(randomQuest);
     }
 }

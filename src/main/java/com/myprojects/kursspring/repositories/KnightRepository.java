@@ -12,7 +12,7 @@ public interface KnightRepository {
 
     void tearDown();
 
-    void createKnight(String name, int age);
+    void createKnight(Knight knight);
 
     Collection<Knight> getAllKnights();
 

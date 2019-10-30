@@ -18,25 +18,11 @@ public class Knight {
     }
 
     public Knight() {
-        this.name = "Lancelot";
-        this.age = 29;
+
     }
 
     @Override
     public String toString() {
         return "Knight named " + name + " ( " + age + " ). Quest: " + quest;
-    }
-
-    public void setQuest(Quest quest) {
-        System.out.println("Assigning quest to Knight");
-        this.quest = quest;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getAge() {
-        return age;
     }
 }

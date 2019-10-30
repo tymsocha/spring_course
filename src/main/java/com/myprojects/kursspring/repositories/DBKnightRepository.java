@@ -22,7 +22,7 @@ public class DBKnightRepository implements KnightRepository {
     }
 
     @Override
-    public void createKnight(String name, int age) {
+    public void createKnight(Knight knight) {
         System.out.println("Using Database");
         throw new NotImplementedException();
     }

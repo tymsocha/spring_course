@@ -11,6 +11,10 @@
 </head>
 <body>
 <div class="container">
+
+    Current time: <span th:text="${timeComponent.getTime()}"/>
+    Gold in the vault: <span th:text="${playerInformation.getGoldAmount()}"/>
+
     <form class="form-horizontal" th:object="${knight}" th:action="@{/knights}" th:method="post">
         <div class="form-group">
             <label class="control-label">Name: </label>

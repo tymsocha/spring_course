@@ -11,6 +11,10 @@
 </head>
 <body>
 <div class="container">
+
+    Current time: <span th:text="${timeComponent.getTime()}"/>
+    Gold in the vault: <span th:text="${playerInformation.getGoldAmount()}"/>
+
     <p th:text="${knight.getName()}"></p>
     <p th:text="${knight.getAge()}"></p>
     <p th:text="${knight.getLevel()}"></p>

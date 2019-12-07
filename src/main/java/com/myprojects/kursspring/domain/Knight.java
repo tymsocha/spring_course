@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -34,6 +32,11 @@ public class Knight {
 
     public Knight() {
 
+    }
+
+    public void setQuest(Quest quest) {
+        quest.setStarted(true);
+        this.quest = quest;
     }
 
     @Override

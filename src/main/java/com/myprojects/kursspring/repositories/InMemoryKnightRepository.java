@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
 public class InMemoryKnightRepository implements KnightRepository {
 
     Map<Integer, Knight> knights = new HashMap<>();
@@ -41,6 +40,7 @@ public class InMemoryKnightRepository implements KnightRepository {
         Knight knight = new Knight(name, age);
         knight.setId(Ids.getNewId(knights.keySet()));
         knights.put(knight.getId(), knight);
+        System.out.println(knight.getId() + " **********************" + knight.getName());
     }
 
     @Override
@@ -70,5 +70,10 @@ public class InMemoryKnightRepository implements KnightRepository {
     @Override
     public Knight getKnightById(Integer id) {
         return knights.get(id);
+    }
+
+    @Override
+    public void updateKnight(int id, Knight knight) {
+        knights.put(id, knight);
     }
 }

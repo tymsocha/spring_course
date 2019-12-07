@@ -12,14 +12,16 @@
 <body>
 <div class="container">
 
-    Current time: <span th:text="${timeComponent.getTime()}"/>
     Gold in the vault: <span th:text="${playerInformation.getGoldAmount()}"/>
+
+    <a th:href="${'/checkQuests'}">Check quests</a>
 
         <table class="table">
             <thead>
             <tr>
                 <td>Name of the knight</td>
                 <td>Level: </td>
+                <td>Quest: </td>
                 <td></td>
             </tr>
             </thead>
@@ -27,6 +29,12 @@
                 <tr>
                     <td th:text="${knight.getName()}"></td>
                     <td th:text="${knight.getLevel()}"></td>
+                    <td>
+                        <span th:if="${knight.quest==null}">Knight has no active quest
+                            <a th:href="${'/assignQuest?knightId='+knight.id}"/>Assign quest to a knight
+                        </span>
+                        <span th:if="${knight.quest!=null}" th:text="${knight.quest.description}"/>
+                    </td>
                     <td><a th:href="${'/knight?id='+knight.id}"/>Check out knight</td>
                     <td><a th:href="${'/knight/delete/'+knight.id}"/>Delete knight</td>
                 </tr>

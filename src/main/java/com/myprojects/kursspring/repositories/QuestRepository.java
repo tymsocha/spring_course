@@ -1,45 +1,46 @@
 package com.myprojects.kursspring.repositories;
 
 import com.myprojects.kursspring.domain.Quest;
+import com.myprojects.kursspring.utils.Ids;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Repository
 @Scope("singleton")
 public class QuestRepository {
     Random rand = new Random();
 
-    List<Quest> questList = new ArrayList<>();
+    Map<Integer, Quest> questMap = new HashMap<>();
 
     public void createQuest(String description) {
-        questList.add(new Quest(description));
+        int newId = Ids.getNewId(questMap.keySet());
+        Quest newQuest = new Quest(newId, description);
+        questMap.put(newId, newQuest);
     }
 
     public List<Quest> getAll() {
-        return questList;
+        return new ArrayList<>(questMap.values());
     }
 
     @PostConstruct
     public void init() {
-        createQuest("Save the princess");
-        createQuest("Take part in the tournament");
+//        createQuest("Save the princess");
+//        createQuest("Take part in the tournament");
     }
 
     @Override
     public String toString() {
         return "QuestRepository{" +
-                "questList=" + questList +
+                "questMap=" + questMap +
                 '}';
     }
 
     public void removeQuest(Quest quest) {
-        questList.remove(quest);
+        questMap.remove(quest.getId());
     }
 
     @Scheduled(fixedDelayString = "${questCreationDelay}")
@@ -53,5 +54,13 @@ public class QuestRepository {
 
         String description = descriptions.get(rand.nextInt(descriptions.size()));
         createQuest(description);
+    }
+
+    public void update(Quest quest) {
+        questMap.put(quest.getId(), quest);
+    }
+
+    public Quest getQuest(Integer id) {
+        return questMap.get(id);
     }
 }

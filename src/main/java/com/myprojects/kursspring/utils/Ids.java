@@ -12,7 +12,8 @@ public class Ids {
         if (keysSoFar.isEmpty()) {
             return 0;
         } else {
-            return keysSoFar.stream().max(Integer::max).get() + 1;
+            Integer integer = keysSoFar.stream().max((Integer::compareTo)).get();
+            return integer + 1;
         }
     }
 }

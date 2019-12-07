@@ -1,6 +1,7 @@
 package com.myprojects.kursspring.repositories;
 
 import com.myprojects.kursspring.domain.Knight;
+import com.myprojects.kursspring.utils.Ids;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -38,16 +39,8 @@ public class InMemoryKnightRepository implements KnightRepository {
     @Override
     public void createKnight(String name, int age) {
         Knight knight = new Knight(name, age);
-        knight.setId(getNewId());
+        knight.setId(Ids.getNewId(knights.keySet()));
         knights.put(knight.getId(), knight);
-    }
-
-    private int getNewId() {
-        if (knights.isEmpty()) {
-            return 0;
-        } else {
-            return knights.keySet().stream().max(Integer::max).get() + 1;
-        }
     }
 
     @Override

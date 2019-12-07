@@ -12,17 +12,19 @@
 <body>
 <div class="container">
 
-    Current time: <span th:text="${timeComponent.getTime()}"/>
-    Gold in the vault: <span th:text="${playerInformation.getGoldAmount()}"/>
+    <!--Current time: <span th:text="${timeComponent.getTime()}"/>-->
+    <!--Gold in the vault: <span th:text="${playerInformation.getGoldAmount()}"/>-->
 
     <form class="form-horizontal" th:object="${knight}" th:action="@{/knights}" th:method="post">
         <div class="form-group">
             <label class="control-label">Name: </label>
             <input type="text" class="form-control" th:field="*{name}"/>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
         </div>
         <div class="form-group">
             <label class="control-label">Age: </label>
             <input type="number" class="form-control" th:field="*{age}"/>
+            <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}"/>
         </div>
         <div class="row">
             <button type="submit" class="btn btn-default">create Knight</button>

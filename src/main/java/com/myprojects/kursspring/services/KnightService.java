@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Service
 public class KnightService {
 
     @Autowired
     KnightRepository repository;
+
+    @Autowired
+    PlayerInformation playerInformation;
 
     public List<Knight> getAllKnights() {
         return new ArrayList<>(repository.getAllKnights());
@@ -36,17 +40,36 @@ public class KnightService {
     }
 
     public int collectRewards() {
+
+        Predicate<Knight> knightPredicate = knight -> {
+            if (knight.getQuest() != null) {
+                return knight.getQuest().isCompleted();
+            } else return false;
+        };
+
         int rewardSum = repository.getAllKnights().stream()
-                .filter(knight -> knight.getQuest().isCompleted())
+                .filter(knightPredicate)
                 .mapToInt(knight -> knight.getQuest().getReward())
                 .sum();
 
         repository.getAllKnights().stream()
-                .filter(knight -> knight.getQuest().isCompleted())
+                .filter(knightPredicate)
                 .forEach(knight -> {
                     knight.setQuest(null);
                 });
 
         return rewardSum;
+    }
+
+    public void getMyGold() {
+        List<Knight> allKnights = getAllKnights();
+        allKnights.forEach(knight -> {
+            if (knight.getQuest() != null) {
+                knight.getQuest().isCompleted();
+            }
+        });
+
+        int currentGold = playerInformation.getGoldAmount();
+        playerInformation.setGoldAmount(currentGold + collectRewards());
     }
 }

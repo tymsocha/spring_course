@@ -1,12 +1,14 @@
 package com.myprojects.kursspring.repositories;
 
 import com.myprojects.kursspring.domain.Quest;
-import com.myprojects.kursspring.utils.Ids;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Repository
@@ -14,36 +16,27 @@ import java.util.*;
 public class QuestRepository {
     Random rand = new Random();
 
-    Map<Integer, Quest> questMap = new HashMap<>();
+    @PersistenceContext
+    private EntityManager em;
 
+    @Transactional // It has to be done whole or not at all
     public void createQuest(String description) {
-        int newId = Ids.getNewId(questMap.keySet());
-        Quest newQuest = new Quest(newId, description);
-        questMap.put(newId, newQuest);
+        Quest newQuest = new Quest(description);
+        em.persist(newQuest);
+
+        System.out.println(newQuest);
     }
 
     public List<Quest> getAll() {
-        return new ArrayList<>(questMap.values());
-    }
+        return em.createQuery("from Quest", Quest.class).getResultList();}
 
-    @PostConstruct
-    public void init() {
-//        createQuest("Save the princess");
-//        createQuest("Take part in the tournament");
-    }
-
-    @Override
-    public String toString() {
-        return "QuestRepository{" +
-                "questMap=" + questMap +
-                '}';
-    }
-
+    @Transactional
     public void removeQuest(Quest quest) {
-        questMap.remove(quest.getId());
+        em.remove(quest);
     }
 
     @Scheduled(fixedDelayString = "${questCreationDelay}")
+    @Transactional
     public void createRandomQuest() {
         List<String> descriptions = new ArrayList<>();
 
@@ -56,11 +49,12 @@ public class QuestRepository {
         createQuest(description);
     }
 
+    @Transactional
     public void update(Quest quest) {
-        questMap.put(quest.getId(), quest);
+        em.merge(quest);
     }
 
     public Quest getQuest(Integer id) {
-        return questMap.get(id);
+        return em.find(Quest.class, id);
     }
 }

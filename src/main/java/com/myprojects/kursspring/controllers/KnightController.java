@@ -3,6 +3,7 @@ package com.myprojects.kursspring.controllers;
 import com.myprojects.kursspring.components.TimeComponent;
 import com.myprojects.kursspring.domain.Knight;
 import com.myprojects.kursspring.domain.PlayerInformation;
+import com.myprojects.kursspring.repositories.PlayerInformationRepository;
 import com.myprojects.kursspring.services.KnightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,12 @@ public class KnightController {
     TimeComponent timeComponent;
 
     @Autowired
-    PlayerInformation playerInformation;
+    PlayerInformationRepository playerInformationRepository;
 
     @RequestMapping("/knights")
     public String getKnights(Model model) {
         List<Knight> allKnights = service.getAllKnights();
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         model.addAttribute("knights", allKnights);
         model.addAttribute("timeComponent", timeComponent);
         model.addAttribute("playerInformation", playerInformation);
@@ -40,6 +42,7 @@ public class KnightController {
 
     @RequestMapping("/newknight")
     public String createKnight(Model model) {
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         model.addAttribute("knight", new Knight());
         model.addAttribute("timeComponent", timeComponent);
         model.addAttribute("playerInformation", playerInformation);
@@ -63,6 +66,7 @@ public class KnightController {
     @RequestMapping(value = "/knight")
     public String getKnight(@RequestParam("id") Integer id, Model model) {
         Knight knight = service.getKnight(id);
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         model.addAttribute("knight", knight);
         model.addAttribute("timeComponent", timeComponent);
         model.addAttribute("playerInformation", playerInformation);

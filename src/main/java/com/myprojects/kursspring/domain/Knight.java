@@ -4,12 +4,16 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
 @Setter
+@Entity
 public class Knight {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @NotNull
@@ -20,6 +24,9 @@ public class Knight {
     @Range(min = 18, max = 80, message = "Knight cannot be younger than 18YO, and older than 60YO")
     private int age /*= 29*/;
 
+    // @Embedded - important and build in entity
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "QUEST_ID")
     private Quest quest;
 
     private int level;

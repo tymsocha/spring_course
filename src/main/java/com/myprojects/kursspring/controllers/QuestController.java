@@ -3,6 +3,7 @@ package com.myprojects.kursspring.controllers;
 import com.myprojects.kursspring.domain.Knight;
 import com.myprojects.kursspring.domain.PlayerInformation;
 import com.myprojects.kursspring.domain.Quest;
+import com.myprojects.kursspring.repositories.PlayerInformationRepository;
 import com.myprojects.kursspring.services.KnightService;
 import com.myprojects.kursspring.services.QuestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class QuestController {
     QuestService questService;
 
     @Autowired
-    PlayerInformation playerInformation;
+    PlayerInformationRepository playerInformationRepository;
 
     @RequestMapping("/assignQuest")
     public String assignQuest(@RequestParam("knightId") Integer id, Model model) {

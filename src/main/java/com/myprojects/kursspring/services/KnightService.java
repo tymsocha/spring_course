@@ -3,9 +3,12 @@ package com.myprojects.kursspring.services;
 import com.myprojects.kursspring.domain.Knight;
 import com.myprojects.kursspring.domain.PlayerInformation;
 import com.myprojects.kursspring.repositories.KnightRepository;
+import com.myprojects.kursspring.repositories.PlayerInformationRepository;
+import com.myprojects.kursspring.repositories.QuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,7 +20,10 @@ public class KnightService {
     KnightRepository repository;
 
     @Autowired
-    PlayerInformation playerInformation;
+    PlayerInformationRepository playerInformationRepository;
+
+    @Autowired
+    QuestRepository questRepository;
 
     public List<Knight> getAllKnights() {
         return new ArrayList<>(repository.getAllKnights());
@@ -61,14 +67,19 @@ public class KnightService {
         return rewardSum;
     }
 
+    @Transactional
     public void getMyGold() {
         List<Knight> allKnights = getAllKnights();
         allKnights.forEach(knight -> {
             if (knight.getQuest() != null) {
-                knight.getQuest().isCompleted();
+                boolean completed = knight.getQuest().isCompleted();
+                if (completed) {
+                    questRepository.update(knight.getQuest());
+                }
             }
         });
 
+        PlayerInformation playerInformation = playerInformationRepository.getFirst();
         int currentGold = playerInformation.getGoldAmount();
         playerInformation.setGoldAmount(currentGold + collectRewards());
     }

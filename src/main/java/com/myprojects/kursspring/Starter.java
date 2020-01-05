@@ -5,6 +5,8 @@ import com.myprojects.kursspring.repositories.KnightRepository;
 import com.myprojects.kursspring.repositories.PlayerInformationRepository;
 import com.myprojects.kursspring.repositories.QuestRepository;
 import com.myprojects.kursspring.services.QuestService;
+import com.myprojects.kursspring.utils.Role;
+import com.myprojects.kursspring.utils.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +31,9 @@ public class Starter implements CommandLineRunner {
     @Autowired
     PlayerInformationRepository playerInformationRepository;
 
+    @Autowired
+    RoleRepository roleRepository;
+
     @Override
     @Transactional
     public void run(String... args) throws Exception {
@@ -39,7 +44,18 @@ public class Starter implements CommandLineRunner {
 
         knightRepository.createKnight("Percival", 30);
 
-        playerInformationRepository.createPlayerInformation(new PlayerInformation());
+        PlayerInformation playerInformation1 = new PlayerInformation("user1", "user1");
+        playerInformationRepository.createPlayerInformation(playerInformation1);
+        PlayerInformation playerInformation2 = new PlayerInformation("user2", "user2");
+        playerInformationRepository.createPlayerInformation(playerInformation2);
+
+        Role user1RoleUSER = new Role("user1", "USER");
+        Role user2RoleUSER = new Role("user2", "USER");
+        Role user2RoleADMIN = new Role("user2", "ADMIN");
+
+        roleRepository.persistRole(user1RoleUSER);
+        roleRepository.persistRole(user2RoleUSER);
+        roleRepository.persistRole(user2RoleADMIN);
 
         questService.assignRandomQuest("Percival");
     }

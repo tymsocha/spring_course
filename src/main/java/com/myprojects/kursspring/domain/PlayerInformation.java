@@ -22,4 +22,16 @@ public class PlayerInformation {
     private int id;
 
     private int goldAmount = 0;
+
+    private String username;
+
+    private String password;
+
+    private boolean enabled;
+
+    public PlayerInformation(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.enabled = true;
+    }
 }
